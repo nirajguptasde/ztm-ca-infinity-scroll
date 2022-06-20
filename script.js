@@ -1,4 +1,3 @@
-
 // ui hooks
 const imageContainer = document.getElementById('image-container');
 const loader = document.getElementById('loader');
@@ -9,9 +8,10 @@ let totalImages = 0;
 let photosArray = [];
 
 // Unsplash API
-const count = 30;
+let  count = 5;
 const apiKey = "rZPCvRkCOdzJEK3N8FEeUcfLSMjVgwF_OTXHiQvxxfA"
 const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
+
 
 // check if all images were loaded
 
@@ -21,7 +21,9 @@ function imageLoaded(){
   console.log('image loaded');
   if(imagesLoaded === totalImages) {
     ready = true;
+    loader.hidden = true;
     console.log('ready = ', ready);
+    count = 30;
   }
 }
 
@@ -37,7 +39,9 @@ function setAttributes(element, attributes) {
 //create elements for links and photos, add to dom
 function displayPhotos(){
   imagesLoaded = 0;
+  // capture amount of objects within the array
   totalImages = photosArray.length;
+
   console.log('total images', totalImages);
   // run a callback function for each object in photos array
   photosArray.forEach((photo) => {
@@ -85,3 +89,4 @@ window.addEventListener('scroll', () => {
 });
 
 getPhotosFromUnsplashApi();
+
